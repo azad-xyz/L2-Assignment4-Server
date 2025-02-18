@@ -10,11 +10,7 @@ const createUser = catchAsync(async (req, res) => {
     success: true,
     message: 'user registered successful',
     statusCode: httpStatus.CREATED,
-    data: {
-      _id: result._id,
-      name: result.name,
-      email: result.email,
-    },
+    data: result,
   });
 });
 
@@ -32,10 +28,7 @@ const loginUser = catchAsync(async (req, res) => {
   });
 });
 
-
-
 export const UserControllers = {
   createUser,
   loginUser,
-
 };
