@@ -19,9 +19,13 @@ const productSchema = new Schema<TProduct>(
       type: String,
       required: true,
     },
-    stock: {
+    quantity: {
       type: Number,
       required: true,
+    },
+    inStock: {
+      type: Boolean,
+      default: true,
     },
   },
   {

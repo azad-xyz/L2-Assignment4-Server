@@ -3,7 +3,8 @@ export type TProduct = {
   brand: string;
   price: number;
   model: string;
-  stock: number;
+  quantity: number;
+  inStock: boolean;
 };
 
 //  name, brand, price, model, stock;

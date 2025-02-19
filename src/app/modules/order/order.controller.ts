@@ -4,11 +4,11 @@ import { OrderServices } from './order.services';
 import httpStatus from 'http-status';
 
 const createOrder = catchAsync(async (req, res) => {
-  const { order } = req.body;
+  const order = req.body;
   const result = await OrderServices.createOrderIntoDB(order);
   sendResponse(res, {
     success: true,
-    message: 'Product created successfully',
+    message: 'Order created successfully',
     statusCode: httpStatus.CREATED,
     data: result,
   });

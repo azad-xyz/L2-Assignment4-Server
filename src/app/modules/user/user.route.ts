@@ -17,6 +17,4 @@ UserRoutes.post(
   UserControllers.loginUser,
 );
 
-
-
 export default UserRoutes;
