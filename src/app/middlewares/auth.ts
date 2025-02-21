@@ -20,7 +20,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
-
     if (!authHeader) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
@@ -33,7 +32,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
     // console.log('Token from auth.ts =>', token);
 
-
     const decoded = jwt.verify(
       token,
       config.jwt_access_secret as string,
@@ -41,12 +39,13 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
     const {
       userId,
+      email,
       role,
       //  iat
     } = decoded;
     // console.log('decoded =>', decoded);
 
-    const isUserExist = await User.findById(userId);
+    const isUserExist = await User.findOne({ email });
     // console.log('token from auth ts', isUserExist);
 
     if (!isUserExist) {
@@ -77,7 +76,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     // req.user = decoded as JwtPayload;
-    req.user = { id: userId, role };
+    req.user = { id: userId, email, role };
 
     next();
   });
