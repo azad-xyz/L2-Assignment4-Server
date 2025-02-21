@@ -4,8 +4,7 @@ import sendResponse from '../../utils/sendResponse';
 import { ProductServices } from './product.service';
 
 const createProduct = catchAsync(async (req, res) => {
-  const { product } = req.body;
-  const result = await ProductServices.createProductIntoDB(product);
+  const result = await ProductServices.createProductIntoDB(req);
   sendResponse(res, {
     success: true,
     message: 'Product created successfully',

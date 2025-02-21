@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import jwt from 'jsonwebtoken';
 
 export const createToken = (
@@ -5,7 +6,8 @@ export const createToken = (
   secret: string,
   expiresIn: string,
 ) => {
+  //@ts-ignore
   return jwt.sign(jwtPayload, secret, {
-    expiresIn: Number(expiresIn),
+    expiresIn: expiresIn,
   });
 };

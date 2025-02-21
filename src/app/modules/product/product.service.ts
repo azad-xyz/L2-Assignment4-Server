@@ -1,8 +1,22 @@
+import { Request } from 'express';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
-const createProductIntoDB = async (payload: TProduct) => {
-  const result = await Product.create(payload);
+const createProductIntoDB = async (req: Request) => {
+  const { file } = req;
+  const payload = req.body;
+
+  if (!file) {
+    throw new Error('Image is required');
+  }
+
+  // Store the single image path
+  const productData = {
+    image: file.path, // Access `file.path` directly
+    ...payload,
+  };
+
+  const result = await Product.create(productData);
   return result;
 };
 
